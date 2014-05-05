@@ -37,7 +37,6 @@ In the second case, he can buy 3 chocolates for $12. However, it takes 4 wrapper
 
 In the third case, he can buy 3 chocolates for $6. Now he can give 2 of this 3 wrappers and get 1 chocolate. Again, he can use his 1 unused wrapper and 1 wrapper of new chocolate to get one more chocolate. Total is 5.
 
-
 */
 import java.io.*;
 import java.util.*;
@@ -51,41 +50,22 @@ public class ChocolateFeast {
         Scanner in = new Scanner(System.in);
         int t = in.nextInt();
         for(int i = 0; i < t; i++){
-            System.out.println(SolveDifferently(in.nextInt(), in.nextInt(), in.nextInt()));
+            System.out.println(Solve(in.nextInt(), in.nextInt(), in.nextInt()));
 
         }
     }
     
     private static long Solve(int money, int price, int wrappersForAChocolate){
         
-
-        int chocolates = money/price;
-        int wrappers = chocolates;
-        int chocolatesPlus = wrappers/wrappersForAChocolate;      
-        wrappers = wrappers % wrappersForAChocolate;        
-        int chocolatesFinal = chocolates + chocolatesPlus;
-        wrappers = wrappers + chocolatesPlus;        
-        if(wrappers >= wrappersForAChocolate){
-                                           
-                int chocolatesPlus1 = wrappers/wrappersForAChocolate;
-                chocolatesFinal = chocolatesFinal + chocolatesPlus1;
-        }
-        return chocolatesFinal;        
-    }   
-
-     private static long SolveDifferently(int money, int price, int wrappersForAChocolate){
-        
-
-        int chocolates = money/price;
-        int wrappers = chocolates;
+        int totalChocolates = money/price;
+        int wrappers = totalChocolates;
 
         while(wrappers >= wrappersForAChocolate){
-            wrappers += wrappers/wrappersForAChocolate;
-            chocolates += wrappers/wrappersForAChocolate;
-            wrappers -= (wrappers/wrappersForAChocolate) * wrappersForAChocolate;
-        }      
-        
-        return chocolates;        
+            int chocolates = wrappers/wrappersForAChocolate;
+            wrappers  = wrappers%wrappersForAChocolate + chocolates;            
+            totalChocolates += chocolates;
+        }              
+        return totalChocolates;           
     }   
-    
+
 }
